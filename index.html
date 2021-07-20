@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="huabanCSS.css"/>
+</head>
+<body> 
+    <div class="nav">
+        <ul class="onestyle">
+            <li class="file">文件
+                <ul class="twofile">
+                    <li id="newcreate">新建</li>
+                    <li>打开</li>
+                    <li id="save">保存</li>
+                </ul>
+            </li>
+            <li class="edit">编辑
+                <ul class="twoedit">
+                    <li>撤销</li>
+                    <li id="clear">清空</li>
+                </ul>
+            </li>
+            <li class="view">视图
+                <ul class="twoview">
+                    <li id="foolpart">工具栏</li>
+                    <li id="colorpart">色板</li>
+                    <li id="statuspart">状态栏</li>
+                </ul>
+            </li>
+            <li class="help">帮助
+                <ul class="twohelp">
+                    <li id="about">关于画板</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="fool">
+        <div id="fool">
+            <div class="xing"></div>
+            <div class="xurect"></div>
+            <div class="eraser" id="eraser"></div>
+            <div class="fill" id="fill"></div>
+            <div class="xi"></div>
+            <div class="big"></div>
+            <div class="bi"></div>
+            <div class="shua"></div>
+            <div class="fill1"></div>
+            <div class="ziti" id="ziti"></div>
+            <div class="linear" id="linear"></div>
+            <div class="quxian" id="quxian"></div>
+            <div class="rect" id="rect"></div>
+            <div class="buguize"></div>
+            <div class="cricle" id="cricle"></div>
+            <div class="qubian"></div>
+            <div class="kuandu">
+                <div class="min" id="min"></div>
+                <div class="medium" id="medium"></div>
+                <div class="max" id="max"></div>
+            </div>
+        </div>
+    </div>
+    <div class="colorborder">
+        <div id="colorborder">
+            <div class="nowuse">
+                <div class="front" id="front"></div>
+                <div class="behind"></div>
+            </div>
+            <div class="black" id="black"></div>
+            <div class="dimgrey" id="dimgrey"></div>
+            <div class="maroon" id="maroon"></div>
+            <div class="yellowgreen" id="yellowgreen"></div>
+            <div class="green" id="green"></div>
+            <div class="seagreen" id="seagreen"></div>
+            <div class="indigo" id="indigo"></div>
+            <div class="purple" id="purple"></div>
+            <div class="bluegreen" id="bluegreen"></div>
+            <div class="grey" id="grey"></div>
+            <div class="lightblue" id="lightblue"></div>
+            <div class="lightblack" id="lightblack"></div>
+            <div class="mediumblue" id="mediumblue"></div>
+            <div class="brown" id="brown"></div>
+            <div class="white" id="white"></div>
+            <div class="lightgray" id="lightgray"></div>
+            <div class="red" id="red"></div>
+            <div class="yellow" id="yellow"></div>
+            <div class="lightgreen" id="lightgreen"></div>
+            <div class="mediumturquoise" id="mediumturquoise"></div>
+            <div class="blue" id="blue"></div>
+            <div class="violet" id="violet"></div>
+            <div class="lightyellow" id="lightyellow"></div>
+            <div class="lightgreen1" id="lightgreen1"></div>
+            <div class="lightblue1" id="lightblue1"></div>
+            <div class="lightpurple"  id="lightpurple"></div>
+            <div class="tomato" id="tomato"></div>
+            <div class="orange" id="orange"></div>
+        </div>
+    </div>
+    <div class="back">
+        <canvas id="mycanvas" width="1000" height="500">
+        </canvas>
+        <input type="text" id="ipt"/>
+    </div>
+</body>
+<script>
+    var black=document.getElementById("black");
+    var dimgrey=document.getElementById("dimgrey");
+    var maroon=document.getElementById("maroon");
+    var yellowgreen=document.getElementById("yellowgreen");
+    var green=document.getElementById("green");
+    var seagreen=document.getElementById("seagreen");
+    var indigo=document.getElementById("indigo");
+    var purple=document.getElementById("purple");
+    var bluegreen=document.getElementById("bluegreen");
+    var grey=document.getElementById("grey");
+    var lightblue=document.getElementById("lightblue");
+    var lightblack=document.getElementById("lightblack");
+    var mediumblue=document.getElementById("mediumblue");
+    var brown=document.getElementById("brown");
+    var white=document.getElementById("white");
+    var lightgray=document.getElementById("lightgray");
+    var yellow=document.getElementById("yellow");
+    var lightgreen=document.getElementById("lightgreen");
+    var mediumturquoise=document.getElementById("mediumturquoise");
+    var blue=document.getElementById("blue");
+    var violet=document.getElementById("violet");
+    var lightyellow=document.getElementById("lightyellow");
+    var lightgreen1=document.getElementById("lightgreen1");
+    var lightblue1=document.getElementById("lightblue1");
+    var lightpurple=document.getElementById("lightpurple");
+    var tomato=document.getElementById("tomato");
+    var orange=document.getElementById("orange");
+    var red=document.getElementById("red");
+    var front=document.getElementById("front");
+
+    var mycanvas=document.getElementById("mycanvas");
+    var ctx=mycanvas.getContext("2d");
+    var line=document.getElementById("linear");
+    var x1=0,y1=0;
+    var x2=0,y2=0;
+    line.onmouseup=function(){
+        line.style.opacity="0.3";
+        eraser.style.opacity="1";
+        quxian.style.opacity="1";
+        ziti.style.opacity="1";
+        fill.style.opacity="1";
+        rect.style.opacity="1";
+        cricle.style.opacity="1";
+        ipt.style.display="none";
+        mycanvas.onmousedown=function(e){
+            x1=e.clientX-60;
+            y1=e.clientY-40;
+        }
+        mycanvas.onmouseup=function(e){
+            x2=e.clientX-60;
+            y2=e.clientY-40;
+            ctx.beginPath();
+            ctx.moveTo(x1,y1);
+            ctx.lineTo(x2,y2);
+            ctx.stroke();
+            ctx.closePath();
+        }
+    }
+
+    var quxian=document.getElementById("quxian");
+    var beginx=0,beginy=0;
+    quxian.onmouseup=function(){
+        line.style.opacity="1";
+        eraser.style.opacity="1";
+        ziti.style.opacity="1";
+        quxian.style.opacity="0.3";
+        fill.style.opacity="1";
+        rect.style.opacity="1";
+        cricle.style.opacity="1";
+        ipt.style.display="none";
+        var isdown=false,ismove=false,isup=false;
+        mycanvas.onmousedown=function(e){
+            isdown=true;
+            beginx=e.clientX-60;
+            beginy=e.clientY-40;
+        }
+        mycanvas.onmousemove=function(e){
+            if(!isdown){
+                return ;
+            }
+            var endx=e.clientX-60;
+            var endy=e.clientY-40;
+            draw(beginx,beginy,endx,endy);
+            beginx=endx;
+            beginy=endy;
+        }
+        mycanvas.onmouseup=function(e){
+            if(!isdown){
+                return ;
+            }
+            var endx=e.clientX-60;
+            var endy=e.clientY-40;
+            draw(beginx,beginy,endx,endy);
+            isdown=false;
+        }
+    }
+    function draw(beginx,beginy,endx,endy){
+        ctx.beginPath();
+        ctx.moveTo(beginx,beginy);
+        ctx.lineTo(endx,endy);
+        ctx.stroke();
+        ctx.closePath();
+    }
+
+
+    var rect=document.getElementById("rect");
+    var x3=0,y3=0,x4=0,y4=0;
+    rect.onmouseup=function(){
+        line.style.opacity="1";
+        eraser.style.opacity="1";
+        quxian.style.opacity="1";
+        ziti.style.opacity="1";
+        rect.style.opacity="0.3";
+        cricle.style.opacity="1";
+        fill.style.opacity="1";
+        ipt.style.display="none";
+        mycanvas.onmousedown=function(e){
+            x3=e.clientX-60;
+            y3=e.clientY-40;
+        }
+        mycanvas.onmouseup=function(e){
+            x4=e.clientX-60;
+            y4=e.clientY-40;
+            ctx.beginPath();
+            ctx.strokeRect(x3,y3,x4-x3,y4-y3);
+            ctx.closePath();
+        }
+    }
+
+
+    var cricle=document.getElementById("cricle");
+    cricle.onmouseup=function(){
+        line.style.opacity="1";
+        ziti.style.opacity="1";
+        eraser.style.opacity="1";
+        quxian.style.opacity="1";
+        rect.style.opacity="1";
+        fill.style.opacity="1";
+        cricle.style.opacity="0.3";
+        ipt.style.display="none";
+        mycanvas.onmousedown=function(e){
+            x3=e.clientX-60;
+            y3=e.clientY-40;
+        }
+        mycanvas.onmouseup=function(e){
+            x4=e.clientX-60;
+            y4=e.clientY-40;
+            var x=(x4+x3)/2,y=(y4+y3)/2;
+            var r=(y4-y3)/2;
+            console.log(x,y,r);
+            ctx.beginPath();
+            ctx.arc(x,y,r,0,Math.PI*2);
+            ctx.stroke();
+            ctx.closePath();
+        }
+    }
+
+
+    var eraser=document.getElementById("eraser");
+    eraser.onmouseup=function(){
+        line.style.opacity="1";
+        eraser.style.opacity="0.3";
+        quxian.style.opacity="1";
+        rect.style.opacity="1";
+        cricle.style.opacity="1";
+        ziti.style.opacity="1";
+        fill.style.opacity="1";
+        ipt.style.display="none";
+        var isdown=false,ismove=false,isup=false;
+        var startx=0,starty=0;
+        mycanvas.onmousedown=function(e){
+            isdown=true;
+            startx=e.clientX-60;
+            starty=e.clientY-40;
+        }
+        mycanvas.onmousemove=function(e){
+            if(!isdown){
+                return ;
+            }
+            var endx=e.clientX-60;
+            var endy=e.clientY-40;
+            ctx.clearRect(startx,starty,10,10);
+            startx=endx;
+            starty=endy;
+        }
+        mycanvas.onmouseup=function(e){
+            if(!isdown){
+                return ;
+            }
+            var endx=e.clientX-60;
+            var endy=e.clientY-40;
+            ctx.clearRect(startx,starty,5,5);
+            isdown=false;
+        }
+    }
+
+
+    var ziti=document.getElementById("ziti");
+    var ipt=document.getElementById("ipt");
+    ziti.onmouseup=function(){
+        line.style.opacity="1";
+        eraser.style.opacity="1";
+        quxian.style.opacity="1";
+        rect.style.opacity="1";
+        cricle.style.opacity="1";
+        fill.style.opacity="1";
+        ziti.style.opacity="0.3";
+        mycanvas.onclick=function(e){
+            var x=e.clientX-60;
+            var y=e.clientY-40;
+            ipt.style.display="block";
+            ctx.font="25px 宋体";
+            ctx.strokeText(ipt.value,x,y);
+        }
+    }
+
+
+    var fill=document.getElementById("fill");
+    fill.onclick=function(){
+        line.style.opacity="1";
+        eraser.style.opacity="1";
+        quxian.style.opacity="1";
+        rect.style.opacity="1";
+        cricle.style.opacity="1";
+        fill.style.opacity="0.3";
+        ziti.style.opacity="1";
+        mycanvas.onclick=function(e){
+            var x,y;
+            x=e.clientX-60;
+            y=e.clientY-40;
+            ctx.beginPath();
+            ctx.fillRect(x,y,10,10);
+            ctx.closePath();
+        }
+    }
+
+
+
+
+
+
+    red.addEventListener("mouseup",function(){
+            front.style.background="red";
+            ctx.fillStyle="red";
+            ctx.strokeStyle="red";
+        })
+        black.addEventListener("mouseup",function(){
+            front.style.background="black";
+            ctx.fillStyle="black";
+            ctx.strokeStyle="black";
+        })
+        dimgrey.addEventListener("mouseup",function(){
+            front.style.background="dimgrey";
+            ctx.fillStyle="dimgrey";
+            ctx.strokeStyle="dimgrey";
+        })
+        maroon.addEventListener("mouseup",function(){
+            front.style.background="maroon";
+            ctx.fillStyle="maroon";
+            ctx.strokeStyle="maroon";
+        })
+        yellowgreen.addEventListener("mouseup",function(){
+            front.style.background="hsla(76, 60%, 36%, 0.562)";
+            ctx.fillStyle="hsla(76, 60%, 36%, 0.562)";
+            ctx.strokeStyle="hsla(76, 60%, 36%, 0.562)";
+        })
+        green.addEventListener("mouseup",function(){
+            front.style.background="green";
+            ctx.fillStyle="green";
+            ctx.strokeStyle="green";
+        })
+        seagreen.addEventListener("mouseup",function(){
+            front.style.background="seagreen";
+            ctx.fillStyle="seagreen";
+            ctx.strokeStyle="seagreen";
+        })
+        indigo.addEventListener("mouseup",function(){
+            front.style.background="indigo";
+            ctx.fillStyle="indigo";
+            ctx.strokeStyle="indigo";
+        })
+        purple.addEventListener("mouseup",function(){
+            front.style.background="purple";
+            ctx.fillStyle="purple";
+            ctx.strokeStyle="purple";
+        })
+        bluegreen.addEventListener("mouseup",function(){
+            front.style.background="#8aaf2598";
+            ctx.fillStyle="#8aaf2598";
+            ctx.strokeStyle="#8aaf2598";
+        })
+        grey.addEventListener("mouseup",function(){
+            front.style.background="#575252";
+            ctx.fillStyle="#575252";
+            ctx.strokeStyle="#575252";
+        })
+        lightblue.addEventListener("mouseup",function(){
+            front.style.background="#6cc1dd";
+            ctx.fillStyle="#6cc1dd";
+            ctx.strokeStyle="#6cc1dd";
+        })
+        lightblack.addEventListener("mouseup",function(){
+            front.style.background="#46334b";
+            ctx.fillStyle="#46334b";
+            ctx.strokeStyle="#46334b";
+        })
+        mediumblue.addEventListener("mouseup",function(){
+            front.style.background="mediumblue";
+            ctx.fillStyle="mediumblue";
+            ctx.strokeStyle="mediumblue";
+        })
+        brown.addEventListener("mouseup",function(){
+            front.style.background="brown";
+            ctx.fillStyle="brown";
+            ctx.strokeStyle="brown";
+        })
+        white.addEventListener("mouseup",function(){
+            front.style.background="white";
+            ctx.fillStyle="white";
+            ctx.strokeStyle="white";
+        })
+        lightgray.addEventListener("mouseup",function(){
+            front.style.background="lightgray";
+            ctx.fillStyle="lightgray";
+            ctx.strokeStyle="lightgray";
+        })
+        yellow.addEventListener("mouseup",function(){
+            front.style.background="yellow";
+            ctx.fillStyle="yellow";
+            ctx.strokeStyle="yellow";
+        })
+        lightgreen.addEventListener("mouseup",function(){
+            front.style.background="hsl(93, 84%, 71%)";
+            ctx.fillStyle="hsl(93, 84%, 71%)";
+            ctx.strokeStyle="hsl(93, 84%, 71%)";
+        })
+        mediumturquoise.addEventListener("mouseup",function(){
+            front.style.background="mediumturquoise";
+            ctx.fillStyle="mediumturquoise";
+            ctx.strokeStyle="mediumturquoise";
+        })
+        blue.addEventListener("mouseup",function(){
+            front.style.background="blue";
+            ctx.fillStyle="blue";
+            ctx.strokeStyle="blue";
+        })
+        violet.addEventListener("mouseup",function(){
+            front.style.background="#fa74fa";
+            ctx.fillStyle="#fa74fa";
+            ctx.strokeStyle="#fa74fa";
+        })
+        lightyellow.addEventListener("mouseup",function(){
+            front.style.background="#ffff83";
+            ctx.fillStyle="#ffff83";
+            ctx.strokeStyle="#ffff83";
+        })
+        lightgreen1.addEventListener("mouseup",function(){
+            front.style.background="#6ae66a";
+            ctx.fillStyle="#6ae66a";
+            ctx.strokeStyle="#6ae66a";
+        })
+        lightblue1.addEventListener("mouseup",function(){
+            front.style.background="#6cc1dd";
+            ctx.fillStyle="#6cc1dd";
+            ctx.strokeStyle="#6cc1dd";
+        })
+        lightpurple.addEventListener("mouseup",function(){
+            front.style.background="mediumorchid";
+            ctx.fillStyle="mediumorchid";
+            ctx.strokeStyle="mediumorchid";
+        })
+        tomato.addEventListener("mouseup",function(){
+            front.style.background="hsla(350, 65%, 48%, 0.58)";
+            ctx.fillStyle="hsla(350, 65%, 48%, 0.58)";
+            ctx.strokeStyle="hsla(350, 65%, 48%, 0.58)";
+        })
+        orange.addEventListener("mouseup",function(){
+            front.style.background="orange";
+            ctx.fillStyle="orange";
+            ctx.strokeStyle="orange";
+        })
+
+        var min=document.getElementById("min");
+        var medium=document.getElementById("medium");
+        var max=document.getElementById("max");
+
+        min.addEventListener("mouseup",function(){
+            min.style.opacity="0.3";
+            medium.style.opacity="1";
+            max.style.opacity="1";
+            ctx.lineWidth=1;
+        })
+        medium.addEventListener("mouseup",function(){
+            medium.style.opacity="0.3";
+            min.style.opacity="1";
+            max.style.opacity="1";
+            ctx.lineWidth=3;
+        })
+        max.addEventListener("mouseup",function(){
+            max.style.opacity="0.3";
+            medium.style.opacity="1";
+            min.style.opacity="1";
+            ctx.lineWidth=6;
+        })
+
+        var about=document.getElementById("about");
+        about.onclick=function(){
+            alert("关于画板的信息");
+        }
+
+        var clear=document.getElementById("clear");
+        clear.onclick=function(){
+            ctx.clearRect(0,0,1000,500);
+        }
+
+
+        var foolpart=document.getElementById("foolpart");
+        var colorpart=document.getElementById("colorpart");
+        var statuspart=document.getElementById("statuspart");
+        var fool=document.getElementById("fool");
+        var colorborder=document.getElementById("colorborder");
+        var countfool=1;
+        var countcolor=1;
+        var countstatus=1;
+        foolpart.onclick=function(){
+            if(countfool%2==1){
+                fool.style.display="none";
+            }else{
+                fool.style.display="block";
+            }
+            countfool++;
+        }
+        
+        colorpart.onclick=function(){
+            if(countcolor%2==1){
+                colorborder.style.display="none";
+            }else{
+                colorborder.style.display="block";
+            }
+            countcolor++;
+        }
+
+        statuspart.onclick=function(){
+            if(countstatus%2==1){
+                mycanvas.style.display="none";
+            }else{
+                mycanvas.style.display="block";
+            }
+            countstatus++;
+        }
+        
+</script>
+</html>
